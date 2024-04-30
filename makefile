@@ -13,7 +13,7 @@ install-ci:
 	rm -rf node_modules
 	npm ci
 
-package: package@createBook package@getBook
+package: package@createBook package@getBooks
 
 package@createBook:
 	mkdir -p dist/createBook
@@ -21,7 +21,7 @@ package@createBook:
 	zip -r ./dist/createBook.zip ./dist/createBook
 
 
-package@getBook:
-	mkdir -p dist/getBook
-	cp out/getBook.js* dist/getBook/
-	zip -r ./dist/getBook.zip ./dist/getBook
+package@getBooks:
+	mkdir -p dist/getBooks
+	cp out/getBooks.js* dist/getBooks/
+	zip -r ./dist/getBooks.zip ./dist/getBooks
