@@ -1,27 +1,33 @@
 all: clean install build install-ci package
 
 clean:
-	rm -rf node_modules dist out
+	rm -rf service/node_modules dist service/out
 
 install:
-	npm install
+	cd service && npm install
 
 build:
-	npm run build
+	cd service && npm run build
 
 install-ci:
-	rm -rf node_modules
+	cd service && \
+	rm -rf node_modules && \
 	npm ci
 
-package: package@createBook package@getBooks
+package: package@layer package@createBook package@getBooks
+
+package@layer:
+	mkdir -p dist/nodejs
+	cp -R service/node_modules dist/nodejs/
+	cd dist && zip -r ./nodejs.zip ./nodejs
 
 package@createBook:
 	mkdir -p dist/createBook
-	cp out/createBook.js* dist/createBook/
-	zip -r ./dist/createBook.zip ./dist/createBook
+	cp service/out/createBook.js* dist/createBook
+	cd dist && zip -r ./createBook.zip ./createBook
 
 
 package@getBooks:
 	mkdir -p dist/getBooks
-	cp out/getBooks.js* dist/getBooks/
-	zip -r ./dist/getBooks.zip ./dist/getBooks
+	cp service/out/getBooks.js* dist/getBooks
+	cd dist && zip -r ./getBooks.zip ./getBooks
