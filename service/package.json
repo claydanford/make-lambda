@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Clay Danford <crd013@gmail.com>",
+  "type": "module",
   "license": "ISC",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.137",

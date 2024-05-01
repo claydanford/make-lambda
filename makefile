@@ -19,15 +19,19 @@ package: package@layer package@createBook package@getBooks
 package@layer:
 	mkdir -p dist/nodejs
 	cp -R service/node_modules dist/nodejs/
-	cd dist && zip -r ./nodejs.zip ./nodejs
+	cp -R service/out/lib dist/
+	cp service/package.json dist/lib
+	cd dist && zip -r ./nodejs.zip ./nodejs ./lib 
 
 package@createBook:
 	mkdir -p dist/createBook
 	cp service/out/createBook.js* dist/createBook
-	cd dist && zip -r ./createBook.zip ./createBook
+	cp service/package.json dist
+	cd dist && zip -r ./createBook.zip ./createBook package.json
 
 
 package@getBooks:
 	mkdir -p dist/getBooks
 	cp service/out/getBooks.js* dist/getBooks
-	cd dist && zip -r ./getBooks.zip ./getBooks
+	cp service/package.json dist
+	cd dist && zip -r ./getBooks.zip ./getBooks package.json
