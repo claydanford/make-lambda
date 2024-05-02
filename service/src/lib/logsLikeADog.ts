@@ -1,1 +1,1 @@
-export const logsLikeADog = () => (console.log("woof"))
+export const logsLikeADog = () => console.log('woof')
