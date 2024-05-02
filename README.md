@@ -13,6 +13,7 @@ An opinionated way to package lambda files.
 - Each file is packaged individually to a zip file and uploaded by the IaC
 - The root Makefile does the packaging
 - This keeps lambda files very small and easily deployable
+- The lambda files are deployed as a module
 
 # Deploying
 - Set CLI creds
