@@ -19,7 +19,7 @@ install@cdk:
 install-ci:
 	cd service && \
 	rm -rf node_modules && \
-	npm ci
+	npm ci --omit=dev
 
 build:
 	cd service && \
