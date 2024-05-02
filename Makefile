@@ -22,7 +22,9 @@ install-ci:
 	npm ci
 
 build:
-	cd service && npm run build
+	cd service && \
+	npm run build && \
+	cp package.json out
 
 deploy:
 	cd cdk && cdk deploy --require-approval never
@@ -30,21 +32,10 @@ deploy:
 destroy:
 	cd cdk && cdk destroy -f
 
-package: package@layer package@createBook package@getBooks
+package: package@layer
 
 package@layer:
 	mkdir -p dist/layer/nodejs
 	cp -R service/node_modules dist/layer/nodejs/
 	cp -R service/out/lib dist/layer
 	cp service/package.json dist/layer/lib
-
-package@createBook:
-	mkdir -p dist/createBook
-	cp service/out/createBook.js* dist/createBook
-	cp service/package.json dist/createBook
-
-
-package@getBooks:
-	mkdir -p dist/getBooks
-	cp service/out/getBooks.js* dist/getBooks
-	cp service/package.json dist/getBooks

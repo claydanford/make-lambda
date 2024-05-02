@@ -18,7 +18,9 @@ export class CdkStack extends Stack {
       new lambda.Function(this, fn, {
         runtime: lambda.Runtime.NODEJS_20_X,
         handler: `${fn}.handler`,
-        code: lambda.Code.fromAsset(path.join(__dirname, `../../dist/${fn}`)),
+        code: lambda.Code.fromAsset(path.join(__dirname, `../../service/out`), {
+          exclude: ['*', `!${fn}.js*`, '!package.json'],
+        }),
         layers: [layer],
       })
     })
