@@ -33,21 +33,18 @@ destroy:
 package: package@layer package@createBook package@getBooks
 
 package@layer:
-	mkdir -p dist/nodejs
-	cp -R service/node_modules dist/nodejs/
-	cp -R service/out/lib dist/
-	cp service/package.json dist/lib
-	cd dist && zip -r ./nodejs.zip ./nodejs ./lib 
+	mkdir -p dist/layer/nodejs
+	cp -R service/node_modules dist/layer/nodejs/
+	cp -R service/out/lib dist/layer
+	cp service/package.json dist/layer/lib
 
 package@createBook:
 	mkdir -p dist/createBook
 	cp service/out/createBook.js* dist/createBook
-	cp service/package.json dist
-	cd dist && zip -r ./createBook.zip ./createBook package.json
+	cp service/package.json dist/createBook
 
 
 package@getBooks:
 	mkdir -p dist/getBooks
 	cp service/out/getBooks.js* dist/getBooks
-	cp service/package.json dist
-	cd dist && zip -r ./getBooks.zip ./getBooks package.json
+	cp service/package.json dist/getBooks

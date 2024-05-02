@@ -9,7 +9,7 @@ export class CdkStack extends Stack {
     const functionNames = ['createBook', 'getBooks']
 
     const layer = new lambda.LayerVersion(this, 'layer', {
-      code: lambda.Code.fromAsset(path.join(__dirname, '../../dist/nodejs.zip')),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../../dist/layer')),
       compatibleRuntimes: [lambda.Runtime.NODEJS_20_X],
       license: 'Apache-2.0',
     })
@@ -17,10 +17,8 @@ export class CdkStack extends Stack {
     functionNames.forEach((fn) => {
       new lambda.Function(this, fn, {
         runtime: lambda.Runtime.NODEJS_20_X,
-        handler: `${fn}/${fn}.handler`,
-        code: lambda.Code.fromAsset(
-          path.join(__dirname, `../../dist/${fn}.zip`),
-        ),
+        handler: `${fn}.handler`,
+        code: lambda.Code.fromAsset(path.join(__dirname, `../../dist/${fn}`)),
         layers: [layer],
       })
     })
