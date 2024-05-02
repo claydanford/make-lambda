@@ -1,10 +1,6 @@
-import { AppSyncResolverEvent } from 'aws-lambda'
-
-interface Args {
+interface Event {
   book: string
   author: string
 }
 
-export const handler = async (event: AppSyncResolverEvent<Args>) => {
-  return event.arguments
-}
+export const handler = async (event: Event) => event
