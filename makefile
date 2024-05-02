@@ -1,18 +1,34 @@
-all: clean install build install-ci package
+all: clean install build install-ci package deploy
 
-clean:
+clean: clean@service clean@cdk
+
+clean@service:
 	rm -rf service/node_modules dist service/out
 
-install:
+clean@cdk:
+	rm -rf cdk/cdk.out cdk/node_modules
+
+install: install@service install@cdk
+
+install@service:
 	cd service && npm install
 
-build:
-	cd service && npm run build
+install@cdk:
+	cd cdk && npm install
 
 install-ci:
 	cd service && \
 	rm -rf node_modules && \
 	npm ci
+
+build:
+	cd service && npm run build
+
+deploy:
+	cd cdk && cdk deploy --require-approval never
+
+destroy:
+	cd cdk && cdk destroy -f
 
 package: package@layer package@createBook package@getBooks
 
